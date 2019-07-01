@@ -6,11 +6,14 @@
 
 int main(void) {
     DDRD &= ~(1 << 2);// PD2 INT0 is input
-    DDRB |= (1 << 0);// PB0 is output
+    DDRB =0b00111111;// PB0 is output
 
 
     EICRA |= (1 << ISC01); // set for rising edge detection
     EICRA |= (1 << ISC00); // set for rising edge detection
+
+
+
 
     sei(); //enable global interrupts
     EIMSK |= (1 << INT0); //enable external interrupts for int0
@@ -24,8 +27,17 @@ int main(void) {
 }
 
 ISR(INT0_vect){
-        PORTB &= ~(1 << 0); //set PB0 as low
-        _delay_ms(BLINK_DELAY_MS);
-        PORTB |= (1<<0); //set PB0 as high
+
+
+
+//        if ((PORTB >> 0) & 1 ){
+//            PORTB &= ~(1 << 0);
+//        }else{
+//            PORTB |= (1 << 0);
+//
+//        }
+
+         PORTB+=1;
+//        _delay_ms(BLINK_DELAY_MS);
 
 }
