@@ -11,6 +11,7 @@ unsigned char usart_receive(void);
 
 void usart_send(char c);
 
+
 int main() {
     usart_init(MYUBRR);
     while (1) {
